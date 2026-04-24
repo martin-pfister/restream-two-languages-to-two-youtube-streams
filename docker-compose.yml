@@ -1,11 +1,10 @@
 services:
-  rtmp-splitter:
+  srt-splitter:
     build: .
-    container_name: rtmp-splitter
+    container_name: srt-splitter
     ports:
-      - "1935:1935"
+      - "9000:9000/udp"
     environment:
       - YT_KEY_EN=${YT_KEY_EN}
       - YT_KEY_DE=${YT_KEY_DE}
     restart: unless-stopped
-
