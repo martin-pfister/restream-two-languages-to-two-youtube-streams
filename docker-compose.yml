@@ -1,0 +1,11 @@
+services:
+  rtmp-splitter:
+    build: .
+    container_name: rtmp-splitter
+    ports:
+      - "1935:1935"
+    environment:
+      - YT_KEY_EN=${YT_KEY_EN}
+      - YT_KEY_DE=${YT_KEY_DE}
+    restart: unless-stopped
+
