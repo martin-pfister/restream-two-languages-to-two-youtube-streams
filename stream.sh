@@ -4,10 +4,19 @@
 trap "exit" SIGTERM SIGINT
 
 while true; do
+    SRT_PORT="${SRT_INPUT_PORT:-9000}"
+    PUBLIC_IP=$(curl -s http://ipinfo.io/ip)
+    SRT_DISPLAY_URL="srt://${PUBLIC_IP:-<YOUR_SERVER_IP>}:${SRT_PORT}"
+    if [ -n "$SRT_INPUT_PASSPHRASE" ]; then
+        SRT_DISPLAY_URL="${SRT_DISPLAY_URL}?passphrase=${SRT_INPUT_PASSPHRASE}"
+    fi
+
     echo "============================================="
     echo "Waiting for incoming SRT connection from OBS..."
+    echo "Configuring OBS with this URL:"
+    echo "  $SRT_DISPLAY_URL"
     echo "============================================="
-    SRT_PORT="${SRT_INPUT_PORT:-9000}"
+    
     SRT_INPUT_URL="srt://0.0.0.0:${SRT_PORT}?mode=listener"
     if [ -n "$SRT_INPUT_PASSPHRASE" ]; then
         SRT_INPUT_URL="${SRT_INPUT_URL}&passphrase=${SRT_INPUT_PASSPHRASE}"
