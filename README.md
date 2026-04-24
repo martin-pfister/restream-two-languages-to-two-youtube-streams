@@ -1,0 +1,57 @@
+# SRT Dual Language Restreamer
+
+This project takes a single SRT stream with dual-language audio (Left channel = Language 1, Right channel = Language 2) and restreams it to two separate YouTube Live events.
+
+## Features
+
+- **SRT Input:** Listens for an incoming SRT connection (e.g., from OBS).
+- **Audio Splitting:** Automatically splits the stereo input into two mono streams (Left to one YouTube key, Right to another).
+- **Passphrase Support:** Secure your SRT stream with an optional passphrase.
+- **Auto-Restart:** Automatically reconnects and resumes if the input stream drops.
+- **Dockerized:** Easy deployment using Docker and Docker Compose.
+
+## Prerequisites
+
+- Docker and Docker Compose installed.
+- Two YouTube Live stream keys.
+
+## Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/martin-pfister/restream-dual-language-to-youtube.git
+   cd restream-dual-language-to-youtube
+   ```
+
+2. **Configure environment variables:**
+   Create a `.env` file from the provided template:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` and fill in your YouTube stream keys and an optional SRT passphrase.
+
+3. **Start the service:**
+   ```bash
+   docker-compose up -d
+   ```
+
+## Configuration
+
+| Variable | Description |
+|----------|-------------|
+| `YOUTUBE_KEY_LEFT` | YouTube stream key for the Left audio channel. |
+| `YOUTUBE_KEY_RIGHT` | YouTube stream key for the Right audio channel. |
+| `SRT_INPUT_PASSPHRASE` | (Optional) Passphrase required for the incoming SRT stream (min 10 chars recommended). |
+
+## Usage (OBS Setup)
+
+1. Go to **Settings > Stream**.
+2. Set **Service** to `Custom...`.
+3. Set **Server** to `srt://<your-server-ip>:9000`.
+4. If you set a passphrase, append it to the URL: `srt://<your-server-ip>:9000?passphrase=YOUR_PASSPHRASE`.
+   - **Note:** The passphrase must be between 10 and 79 characters long.
+5. Ensure your audio output is Stereo, with your primary language on the Left channel and the secondary on the Right.
+
+## License
+
+MIT
