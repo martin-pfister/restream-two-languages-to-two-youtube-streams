@@ -11,7 +11,7 @@ while true; do
     fi
 
     ffmpeg \
-        -listen 1 -i "$SRT_INPUT_URL" \
+        -i "$SRT_INPUT_URL" \
         -filter_complex "[0:a]pan=stereo|c0=c0|c1=c0[a_en];[0:a]pan=stereo|c0=c1|c1=c1[a_de]" \
         -map 0:v -map "[a_en]" -c:v copy -c:a aac -b:a 160k \
             -f flv "rtmp://a.rtmp.youtube.com/live2/${YT_KEY_EN}" \
