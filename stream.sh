@@ -17,12 +17,15 @@ while true; do
     echo "  $SRT_DISPLAY_URL"
     echo "============================================="
     
-    SRT_INPUT_URL="srt://0.0.0.0:${SRT_PORT}?mode=listener"
+    SRT_PARAMS="mode=listener&latency=2000000&rcvbuf=67108864&sndbuf=67108864&pkt_size=1316"
+    SRT_INPUT_URL="srt://0.0.0.0:${SRT_PORT}?${SRT_PARAMS}"
     if [ -n "$SRT_INPUT_PASSPHRASE" ]; then
         SRT_INPUT_URL="${SRT_INPUT_URL}&passphrase=${SRT_INPUT_PASSPHRASE}"
     fi
 
     ffmpeg \
+        -fflags +genpts+discardcorrupt \
+        -err_detect ignore_err \
         -i "$SRT_INPUT_URL" \
         -filter_complex "[0:a]pan=stereo|c0=c0|c1=c0,aresample=async=1[a_left];[0:a]pan=stereo|c0=c1|c1=c1,aresample=async=1[a_right]" \
         -map 0:v -map "[a_left]" -c:v copy -c:a aac -b:a 160k \
