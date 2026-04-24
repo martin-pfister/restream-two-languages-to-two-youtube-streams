@@ -32,7 +32,7 @@ This project takes a single stereo SRT stream (e.g. from [OBS](https://obsprojec
 
 3. **Start the service:**
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 ## Configuration
