@@ -1,11 +1,11 @@
-# SRT Dual Language Restreamer
+# Restream two languages to two YouTube streams
 
-This project takes a single SRT stream with dual-language audio (Left channel = Language 1, Right channel = Language 2) and restreams it to two separate YouTube Live events.
+This project takes a single stereo SRT stream (e.g. from [OBS](https://obsproject.com/)) with dual-language audio (left channel = language 1, right channel = language 2) and restreams it to two separate YouTube Live events.
 
 ## Features
 
 - **SRT Input:** Listens for an incoming SRT connection (e.g., from OBS).
-- **Audio Splitting:** Automatically splits the stereo input into two mono streams (Left to one YouTube key, Right to another).
+- **Audio Splitting:** Automatically splits the stereo input into two mono streams (left to one YouTube key, right to another).
 - **Passphrase Support:** Secure your SRT stream with an optional passphrase.
 - **Auto-Restart:** Automatically reconnects and resumes if the input stream drops.
 - **Dockerized:** Easy deployment using Docker and Docker Compose.
