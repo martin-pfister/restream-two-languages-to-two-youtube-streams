@@ -3,9 +3,10 @@ services:
     build: .
     container_name: srt-splitter
     ports:
-      - "9000:9000/udp"
+      - "${SRT_INPUT_PORT:-9000}:${SRT_INPUT_PORT:-9000}/udp"
     environment:
       - YOUTUBE_KEY_LEFT=${YOUTUBE_KEY_LEFT}
       - YOUTUBE_KEY_RIGHT=${YOUTUBE_KEY_RIGHT}
       - SRT_INPUT_PASSPHRASE=${SRT_INPUT_PASSPHRASE}
+      - SRT_INPUT_PORT=${SRT_INPUT_PORT:-9000}
     restart: unless-stopped

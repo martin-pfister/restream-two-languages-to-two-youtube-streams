@@ -42,13 +42,14 @@ This project takes a single stereo SRT stream (e.g. from [OBS](https://obsprojec
 | `YOUTUBE_KEY_LEFT` | YouTube stream key for the Left audio channel. |
 | `YOUTUBE_KEY_RIGHT` | YouTube stream key for the Right audio channel. |
 | `SRT_INPUT_PASSPHRASE` | (Optional) Passphrase required for the incoming SRT stream (min 10 chars recommended). |
+| `SRT_INPUT_PORT` | (Optional) Port to listen for the incoming SRT stream (default: 9000). |
 
 ## Usage (OBS Setup)
 
 1. Go to **Settings > Stream**.
 2. Set **Service** to `Custom...`.
-3. Set **Server** to `srt://<your-server-ip>:9000`.
-4. If you set a passphrase, append it to the URL: `srt://<your-server-ip>:9000?passphrase=YOUR_PASSPHRASE`.
+3. Set **Server** to `srt://<your-server-ip>:<port>`. (Default port is 9000).
+4. If you set a passphrase, append it to the URL: `srt://<your-server-ip>:<port>?passphrase=YOUR_PASSPHRASE`.
    - **Note:** The passphrase must be between 10 and 79 characters long.
 5. Ensure your audio output is Stereo, with your primary language on the Left channel and the secondary on the Right.
 

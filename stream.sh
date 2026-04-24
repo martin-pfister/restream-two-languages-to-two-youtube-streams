@@ -7,7 +7,8 @@ while true; do
     echo "============================================="
     echo "Waiting for incoming SRT connection from OBS..."
     echo "============================================="
-    SRT_INPUT_URL="srt://0.0.0.0:9000?mode=listener"
+    SRT_PORT="${SRT_INPUT_PORT:-9000}"
+    SRT_INPUT_URL="srt://0.0.0.0:${SRT_PORT}?mode=listener"
     if [ -n "$SRT_INPUT_PASSPHRASE" ]; then
         SRT_INPUT_URL="${SRT_INPUT_URL}&passphrase=${SRT_INPUT_PASSPHRASE}"
     fi
