@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # This loop ensures that if OBS drops, the listener immediately restarts
+trap "exit" SIGTERM SIGINT
+
 while true; do
     echo "============================================="
     echo "Waiting for incoming SRT connection from OBS..."
@@ -16,7 +18,10 @@ while true; do
         -map 0:v -map "[a_left]" -c:v copy -c:a aac -b:a 160k \
             -f flv "rtmp://a.rtmp.youtube.com/live2/${YOUTUBE_KEY_LEFT}" \
         -map 0:v -map "[a_right]" -c:v copy -c:a aac -b:a 160k \
-            -f flv "rtmp://a.rtmp.youtube.com/live2/${YOUTUBE_KEY_RIGHT}"
+            -f flv "rtmp://a.rtmp.youtube.com/live2/${YOUTUBE_KEY_RIGHT}" &
+    
+    FFMPEG_PID=$!
+    wait $FFMPEG_PID
 
     echo "FFmpeg exited, restarting in 2 seconds..."
     sleep 2
