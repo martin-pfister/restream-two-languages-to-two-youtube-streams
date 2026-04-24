@@ -7,4 +7,5 @@ services:
     environment:
       - YT_KEY_EN=${YT_KEY_EN}
       - YT_KEY_DE=${YT_KEY_DE}
+      - SRT_INPUT_PASSPHRASE=${SRT_INPUT_PASSPHRASE}
     restart: unless-stopped
