@@ -5,7 +5,7 @@ services:
     ports:
       - "9000:9000/udp"
     environment:
-      - YT_KEY_EN=${YT_KEY_EN}
-      - YT_KEY_DE=${YT_KEY_DE}
+      - YOUTUBE_KEY_LEFT=${YOUTUBE_KEY_LEFT}
+      - YOUTUBE_KEY_RIGHT=${YOUTUBE_KEY_RIGHT}
       - SRT_INPUT_PASSPHRASE=${SRT_INPUT_PASSPHRASE}
     restart: unless-stopped
