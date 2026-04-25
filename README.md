@@ -35,6 +35,18 @@ This project takes a single stereo SRT stream (e.g. from [OBS](https://obsprojec
    docker compose up -d
    ```
 
+4. **Increase receive socket buffer size to 64MB:**
+   Run this on the host:
+   ```bash
+   sudo tee /etc/sysctl.d/99-srt-tuning.conf > /dev/null <<EOF
+   # FFmpeg SRT UDP Buffer Tuning
+   # Increases max network receive buffers to 64MB to prevent packet drops
+   net.core.rmem_max=67108864
+   net.core.rmem_default=67108864
+   EOF
+   sudo sysctl --system
+   ```
+
 ## Configuration
 
 | Variable | Description |
